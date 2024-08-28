@@ -65,6 +65,13 @@ if __name__ == "__main__":
 
 ```
 
+## Example
+
+# Image tag with markdown support
+
+<img src="https://github.com/titu1994/gradio-json-markdown/releases/download/0.0.1/pic.png" alt="Static Badge">
+
+
 ## `JsonMarkdown`
 
 ### Initialization
