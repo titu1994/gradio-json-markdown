@@ -46,9 +46,15 @@
       })
     );
 
+    function escapeXmlTags(value: string): string {
+        return value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
     function toMarkdown(value: string): string {
-        console.log("Render:" + value);
-        const parsed = marked.parse(value);
+        // console.log("Render:" + value);
+        const escapedValue = escapeXmlTags(value);
+        console.log("Escaped:" + escapedValue);
+        const parsed = marked.parse(escapedValue);
         const parser = new DOMParser();
         const doc = parser.parseFromString(parsed, 'text/html');
         doc.querySelectorAll('code').forEach((codeElement) => {

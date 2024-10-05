@@ -8,7 +8,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "gradio_json_markdown"
-version = "0.0.1"
+version = "0.0.2"
 description = "JSON module with markdown support"
 readme = "README.md"
 license = "apache-2.0"
