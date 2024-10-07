@@ -46,14 +46,21 @@
       })
     );
 
-    function escapeXmlTags(value: string): string {
-        return value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    function escapeXmlTagsOutsideCodeBlocks(value: string): string {
+        const codeBlockRegex = /(```[\s\S]*?```)/g;
+        const parts = value.split(codeBlockRegex);
+        return parts.map(part => {
+            if (part.startsWith('```') && part.endsWith('```')) {
+                return part; // Do not escape inside code blocks
+            }
+            return part.replace(/</g, '&lt;').replace(/>/g, '&gt;'); // Escape outside code blocks
+        }).join('');
     }
 
     function toMarkdown(value: string): string {
         // console.log("Render:" + value);
-        const escapedValue = escapeXmlTags(value);
-        console.log("Escaped:" + escapedValue);
+        const escapedValue = escapeXmlTagsOutsideCodeBlocks(value);
+        //console.log("Escaped:" + escapedValue);
         const parsed = marked.parse(escapedValue);
         const parser = new DOMParser();
         const doc = parser.parseFromString(parsed, 'text/html');
